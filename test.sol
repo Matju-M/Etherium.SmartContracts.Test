@@ -1,4 +1,4 @@
-pragma solidity ^0.4.25;
+pragma solidity ^0.4.11;
 
 contract LetsGo {
     uint i = 0;
@@ -9,8 +9,7 @@ contract LetsGo {
         casette, 
         dvd 
     }
-
-   //this is a key value pair 
+    
     mapping (int => Media) kindaMapping;
     
     struct Media{
@@ -39,14 +38,14 @@ contract LetsGo {
     function addToMapping(MediaType mediaType, int location) payable {
         kindaMapping[location].set = true;
     
-        if(kindaMapping[location].set) {
+        if(kindaMapping[location].set){
             kindaMapping[location].mediaType = mediaType; 
         }
         
     }
     
-    function getFromMapping(int location) constant returns (MediaType) {
-        return kindaMapping[location].mediaType;
+    function getFromMapping(int location) constant returns (MediaType, bool) {
+        return ( kindaMapping[location].mediaType, kindaMapping[location].set);
     }
 
 }
