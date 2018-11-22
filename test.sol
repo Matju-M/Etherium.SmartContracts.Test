@@ -1,7 +1,22 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.25;
 
 contract LetsGo {
     uint i = 0;
+    int[] array;
+    enum MediaType {
+        notSet,
+        video, 
+        casette, 
+        dvd 
+    }
+
+   //this is a key value pair 
+    mapping (int => Media) kindaMapping;
+    
+    struct Media{
+        MediaType mediaType;
+        bool set;
+    }
     
     function getI() constant returns (uint) {
         return i;
@@ -16,4 +31,22 @@ contract LetsGo {
         i = x + y;
         return i;
     }
+    
+    function addSomething(int value) payable {
+        array.push(value);
+    }
+    
+    function addToMapping(MediaType mediaType, int location) payable {
+        kindaMapping[location].set = true;
+    
+        if(kindaMapping[location].set) {
+            kindaMapping[location].mediaType = mediaType; 
+        }
+        
+    }
+    
+    function getFromMapping(int location) constant returns (MediaType) {
+        return kindaMapping[location].mediaType;
+    }
+
 }
