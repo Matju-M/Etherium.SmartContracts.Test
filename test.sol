@@ -10,11 +10,16 @@ contract LetsGo {
         dvd 
     }
     
+    address owner;
     mapping (int => Media) kindaMapping;
     
     struct Media{
         MediaType mediaType;
         bool set;
+    }
+    
+    constructor(){
+        owner = msg.sender;
     }
     
     function getI() constant returns (uint) {
@@ -44,8 +49,20 @@ contract LetsGo {
         
     }
     
-    function getFromMapping(int location) constant returns (MediaType, bool) {
+    function getFromMapping(int location) constant returns (MediaType mediaType, bool isSet) {
         return ( kindaMapping[location].mediaType, kindaMapping[location].set);
     }
 
+    function amITheOwner() constant returns (bool isOwner) {
+        return msg.sender == owner;
+    }
+    
+    function sendMeSomeWei() payable {
+        require(msg.value > 0, " You're greedy! send some wei!");    
+    }
+    
+    // this is a fallback function
+    function() payable {
+        revert();
+    }
 }
