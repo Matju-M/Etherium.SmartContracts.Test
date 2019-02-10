@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.25;
 
 contract LetsGo {
     uint i = 0;
